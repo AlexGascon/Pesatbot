@@ -10,5 +10,4 @@ pesatbot.set_webhook('http://pesatbot.herokuapp.com')
 
 @bot.message.handler(func=lambda m: True)
 def pole_reply(message):
-	if message.text.lower().contains('pole'):
-		pesatbot.reply_to(message, 'Tio, eres un puto pesat')
+	pesatbot.reply_to(message, 'Tio, eres un puto pesat')
