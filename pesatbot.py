@@ -1,18 +1,37 @@
+import random
+
 import telebot
 import os
 from flask import Flask, request
 
-TOKEN = "135590410:AAHt91I6GrFBQv9QTxEsU6YeA0Aj1qfOBKE"
+# Creating the bot
+TOKEN = os.environ['TELEGRAM_BOT_TOKEN'] # Token previously stored in an environment var
 bot = telebot.TeleBot(TOKEN)
 
+# Creating the server
 server = Flask(__name__)
 
+
+def select_response(message):
+	responses = ['Ie {} tio, no et canses?', '{}, eres un puto pesat de tio', 'Ie {}, ja hi ha prou que ja cansa',
+				'Collons {}, que pesat eres quan vols', "Que si {}, tio pesat, que ja t'hem llegit"]
+
+	response_to_use = random.choice(responses)
+	response = response_to_use.format(message.from_user.first_name)
+
+	return response
+
+
+# The decorator (@bot.message_handler) indicates the type of messages that will activate this function
+# In this case, we'll activate it for every message. See telebot API for more possibilities 
 @bot.message_handler(func=lambda message: True)
 def pole_reply(message):
+	# If the message contains the word 'pole' (case insensitive), the bot replies
 	if 'pole' in message.text.lower():
-		print message.text.lower()
-		bot.reply_to(message, 'Tio, eres un puto pesat')
+		resposta = select_response(message)
+		bot.reply_to(message, resposta)
 
+# Server configuration
 @server.route("/bot", methods=['POST'])
 def getMessage():
     bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
@@ -24,8 +43,7 @@ def webhook():
     bot.set_webhook(url="https://pesatbot.herokuapp.com/bot")
     return "!", 200
 
+# Running the server
+# It's very important to set the port with the environment variable, because it's how heroku stores it
 server.run(host="0.0.0.0", port=os.environ.get('PORT', 5000))
 server = Flask(__name__)
-"""
-bot.polling(none_stop=True)
-"""
