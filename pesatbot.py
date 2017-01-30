@@ -5,6 +5,8 @@ from flask import Flask, request
 TOKEN = "135590410:AAHt91I6GrFBQv9QTxEsU6YeA0Aj1qfOBKE"
 bot = telebot.TeleBot(TOKEN)
 
+server = Flask(__name__)
+
 @bot.message_handler(func=lambda message: True)
 def pole_reply(message):
 	if 'pole' in message.text.lower():
