@@ -11,5 +11,9 @@ def pole_reply(message):
 		print message.text.lower()
 		bot.reply_to(message, 'Tio, eres un puto pesat')
 
-bot.listen(os.environ['PORT'] || 5000)
+try: 
+	bot.listen(os.environ['PORT'])
+except:
+	bot.listen(5000)
+	
 bot.polling(none_stop=True)
