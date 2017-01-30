@@ -1,1 +1,1 @@
-web: python pesatbot.py ${PORT}
+web: python pesatbot.py
