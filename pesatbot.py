@@ -1,4 +1,5 @@
 import telebot
+import os
 from flask import Flask, request
 
 TOKEN = "135590410:AAHt91I6GrFBQv9QTxEsU6YeA0Aj1qfOBKE"
@@ -14,13 +15,13 @@ def pole_reply(message):
 
 @server.route("/bot", methods=['POST'])
 def getMessage():
-    bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
+    pesatbot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
     return "!", 200
 
 @server.route("/")
 def webhook():
-    bot.remove_webhook()
-    bot.set_webhook(url="https://pesatbot.herokuapp.com/bot")
+    pesatbot.remove_webhook()
+    pesatbot.set_webhook(url="https://pesatbot.herokuapp.com/bot")
     return "!", 200
 
 server.run(host="0.0.0.0", port=os.environ.get('PORT', 5000))
