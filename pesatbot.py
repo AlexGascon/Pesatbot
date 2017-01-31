@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-   
+
 import random
 
 import telebot
@@ -32,7 +34,7 @@ def pole_reply(message):
 		bot.reply_to(message, resposta)
 
 	if 'agatangelo' in message.text.normalize('NFKD', unicode_string).encode('ascii','ignore').lower():
-		resposta = "No sé qui tindrà eixe nom, però si l'aprecieu, feuli un favor i sacrifiqueu-lo."
+		resposta = u"No sé qui tindrà eixe nom, pero si l'aprecieu, feuli un favor i sacrifiqueu-lo."
 		bot.reply_to(message, reposta)
 
 # Server configuration
