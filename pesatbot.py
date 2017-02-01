@@ -33,10 +33,6 @@ def pole_reply(message):
 		resposta = select_response(message)
 		bot.reply_to(message, resposta)
 
-	if 'agatangelo' in message.text.lower():
-		resposta = u"No sé qui tindrà eixe nom, pero si l'aprecieu, feuli un favor i sacrifiqueu-lo."
-		bot.reply_to(message, reposta)
-
 # Server configuration
 @server.route("/bot", methods=['POST'])
 def getMessage():

@@ -1,0 +1,5 @@
+# PyCharm config folder
+.idea/*
+
+# Local environment settings
+.env
