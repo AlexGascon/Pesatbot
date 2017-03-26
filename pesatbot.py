@@ -29,4 +29,5 @@ def pole_reply(message):
 		resposta = select_response(message)
 		bot.reply_to(message, resposta)
 
+bot.delete_webhook()
 bot.polling(none_stop=True)
