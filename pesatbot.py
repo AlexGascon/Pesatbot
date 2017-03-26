@@ -4,14 +4,10 @@ import random
 
 import telebot
 import os
-from flask import Flask, request
 
 # Creating the bot
 TOKEN = os.environ['TELEGRAM_BOT_TOKEN'] # Token previously stored in an environment var
 bot = telebot.TeleBot(TOKEN)
-
-# Creating the server
-server = Flask(__name__)
 
 
 def select_response(message):
@@ -33,19 +29,4 @@ def pole_reply(message):
 		resposta = select_response(message)
 		bot.reply_to(message, resposta)
 
-# Server configuration
-@server.route("/bot", methods=['POST'])
-def getMessage():
-    bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
-    return "!", 200
-
-@server.route("/")
-def webhook():
-    bot.remove_webhook()
-    bot.set_webhook(url="https://pesatbot.herokuapp.com/bot")
-    return "!", 200
-
-# Running the server
-# It's very important to set the port with the environment variable, because it's how heroku stores it
-server.run(host="0.0.0.0", port=os.environ.get('PORT', 5000))
-server = Flask(__name__)
+bot.polling(none_stop=True)

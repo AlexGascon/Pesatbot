@@ -1,1 +1,1 @@
-web: python pesatbot.py
+worker: python pesatbot.py
