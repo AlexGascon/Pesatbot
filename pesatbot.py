@@ -15,7 +15,7 @@ def select_response(message):
 				'Collons {}, que pesat eres quan vols', "Que si {}, tio pesat, que ja t'hem llegit"]
 
 	response_to_use = random.choice(responses)
-	name = unicodedata.normalize('NKFD', message.from_user.first_name)
+	name = unicodedata.normalize('NFKD', message.from_user.first_name)
 	response = response_to_use.format(name)
 
 	return response
