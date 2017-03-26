@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-   
 
 import random
-
 import telebot
 import os
+import unicodedata
 
 # Creating the bot
 TOKEN = os.environ['TELEGRAM_BOT_TOKEN'] # Token previously stored in an environment var
@@ -15,7 +15,8 @@ def select_response(message):
 				'Collons {}, que pesat eres quan vols', "Que si {}, tio pesat, que ja t'hem llegit"]
 
 	response_to_use = random.choice(responses)
-	response = response_to_use.format(message.from_user.first_name)
+	name = unicodedata.normalize('NKFD', message.from_user.first_name)
+	response = response_to_use.format(name)
 
 	return response
 
